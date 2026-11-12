@@ -1,0 +1,41 @@
+# --- Data (never committed) ---
+data/raw/
+data/processed/
+data/yolo/
+
+# --- Model weights & training artifacts ---
+*.pt
+*.pth
+*.onnx
+*.safetensors
+runs/
+outputs/
+wandb/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Secrets ---
+.env
