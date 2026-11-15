@@ -101,7 +101,22 @@ def push_model(
     return f"https://huggingface.co/{repo_id}"
 
 
+def use_system_certificates() -> bool:
+    """Verify HTTPS against the OS certificate store when ``truststore`` is installed.
+
+    Needed on networks that re-sign TLS traffic with a certificate the OS
+    trusts but Python's bundled CA list does not. Verification stays on.
+    """
+    try:
+        import truststore
+    except ImportError:
+        return False
+    truststore.inject_into_ssl()
+    return True
+
+
 def main(argv: list[str] | None = None) -> int:
+    use_system_certificates()
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     p.add_argument("--weights", type=Path, required=True)
     p.add_argument("--repo", required=True, help="<user>/<model-name>")
