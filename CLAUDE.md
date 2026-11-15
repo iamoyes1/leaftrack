@@ -30,6 +30,16 @@ demo on Hugging Face Spaces, README with demo GIF and results table.
   evaluate on KOMATSUNA only unless the owners grant written permission.
 - Splits are by physical plant (`sequence_id`), never by frame or camera. The
   committed split lives in `configs/splits/komatsuna.json`.
+- 2026-11-15: the user's local RTX 3050 Laptop GPU (6 GB) may also be used
+  for training. The venv has the CUDA 13.0 build of torch. The Colab/Kaggle
+  notebooks stay the documented, reproducible path.
+- Multi-view crops contain leaves of neighbouring plants at the edges, which
+  the labels (correctly) ignore. `LeafSegmenter` drops border-touching leaves
+  that never come near the plant centre (`drop_neighbor_leaves`); on ground
+  truth this removes 0 of 5,820 true leaves. Leaf metrics use a confidence
+  threshold selected on the val split, never on test.
+- Default training schedule is 80 epochs / patience 20 (YOLO11n peaked at
+  epoch 73 of a 150-epoch run).
 - KOMATSUNA label colors are stable per leaf over time, so they serve as
   ground-truth track IDs (kept per label line in `manifest.csv`).
 
