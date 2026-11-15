@@ -1,0 +1,28 @@
+{
+  "dataset": "komatsuna",
+  "unit": "sequence_id (one physical plant, all cameras and time points)",
+  "seed": 42,
+  "ratios": [
+    0.6,
+    0.2,
+    0.2
+  ],
+  "groups": {
+    "train": [
+      "multi_p01",
+      "multi_p02",
+      "multi_p03",
+      "rgbd_p00",
+      "rgbd_p02",
+      "rgbd_p03"
+    ],
+    "val": [
+      "multi_p04",
+      "rgbd_p04"
+    ],
+    "test": [
+      "multi_p00",
+      "rgbd_p01"
+    ]
+  }
+}
