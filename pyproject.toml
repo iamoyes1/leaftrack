@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "leaftrack"
-version = "0.1.0"
+version = "0.2.0"
 description = "Leaf instance segmentation, tracking and growth analytics on plant time-lapse images."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -39,6 +39,7 @@ pythonpath = ["."]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+extend-exclude = ["notebooks"]  # launcher cells are mostly long shell commands
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
