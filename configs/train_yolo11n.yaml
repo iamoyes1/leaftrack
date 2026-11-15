@@ -1,0 +1,30 @@
+# YOLO11n-seg on KOMATSUNA: the default model (fastest on the CPU demo).
+# Keys under `train` are passed straight to Ultralytics `YOLO.train()`;
+# see https://docs.ultralytics.com/modes/train/#train-settings
+model: yolo11n-seg.pt
+data: data/processed/komatsuna/dataset.yaml
+
+train:
+  epochs: 80            # YOLO11n peaked at epoch 73 of a 150-epoch run
+  patience: 20          # stop early if val fitness stalls for 20 epochs
+  imgsz: 640
+  batch: 16             # fits a 16 GB T4 comfortably
+  cache: ram            # 720 training images, about 1 GB in RAM
+  optimizer: auto
+  cos_lr: true
+  close_mosaic: 10
+  seed: 42
+  save_period: 10       # extra epoch checkpoints, in case a Colab session dies
+  plots: true
+
+  # Augmentation. Top-down plants have no canonical orientation, so full
+  # rotations and vertical flips are label-preserving.
+  degrees: 180
+  flipud: 0.5
+  fliplr: 0.5
+  scale: 0.5
+  translate: 0.1
+  mosaic: 1.0
+  hsv_h: 0.015
+  hsv_s: 0.5
+  hsv_v: 0.4

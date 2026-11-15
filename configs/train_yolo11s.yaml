@@ -1,0 +1,27 @@
+# YOLO11s-seg on KOMATSUNA: the larger, more accurate comparison model.
+# Same recipe as train_yolo11n.yaml except the model and batch size.
+model: yolo11s-seg.pt
+data: data/processed/komatsuna/dataset.yaml
+
+train:
+  epochs: 80            # YOLO11n peaked at epoch 73 of a 150-epoch run
+  patience: 20
+  imgsz: 640
+  batch: 16
+  cache: ram
+  optimizer: auto
+  cos_lr: true
+  close_mosaic: 10
+  seed: 42
+  save_period: 10
+  plots: true
+
+  degrees: 180
+  flipud: 0.5
+  fliplr: 0.5
+  scale: 0.5
+  translate: 0.1
+  mosaic: 1.0
+  hsv_h: 0.015
+  hsv_s: 0.5
+  hsv_v: 0.4
