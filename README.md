@@ -40,8 +40,8 @@ Test split: 240 images of 2 held-out plants (one per capture rig).
 
 | Model | Params | Mask mAP50 | Mask mAP50-95 | SBD ↑ | FBD ↑ | \|DiC\| ↓ | Exact leaf count | CPU latency* |
 |---|---|---|---|---|---|---|---|---|
-| **YOLO11n-seg** (demo model) | 2.8 M | **0.987** | **0.825** | 0.930 | 0.970 | 0.25 | 82% | **240 ms** |
-| YOLO11s-seg | 10.1 M | 0.965 | 0.806 | **0.934** | **0.971** | **0.19** | **85%** | 672 ms |
+| **[YOLO11n-seg](https://huggingface.co/Awais05/leaftrack-yolo11n-seg)** (demo model) | 2.8 M | **0.987** | **0.825** | 0.930 | 0.970 | 0.25 | 82% | **240 ms** |
+| [YOLO11s-seg](https://huggingface.co/Awais05/leaftrack-yolo11s-seg) | 10.1 M | 0.965 | 0.806 | **0.934** | **0.971** | **0.19** | **85%** | 672 ms |
 
 \* Median per image at 640 px on 2 CPU threads, matching the free Hugging Face Spaces tier.
 
@@ -78,7 +78,20 @@ python evaluate.py --weights runs/segment/yolo11n/weights/best.pt --device 0
 - **Checkpoints:** written every 10 epochs, and `--resume` continues an interrupted run from `last.pt`.
 - **These results** come from a laptop RTX 3050 (6 GB). YOLO11n trained with a 150-epoch budget, early-stopped at epoch 116 (best epoch 73), in 42 minutes. YOLO11s trained for 80 epochs at batch 8 in 53 minutes. The configs now default to 80 epochs with patience 20.
 
-Weights are published to the Hugging Face Hub (`python -m leaftrack.hub`), never committed to git.
+## Pretrained weights
+
+Both models are on the Hugging Face Hub, each with its test metrics and a model card:
+[`Awais05/leaftrack-yolo11n-seg`](https://huggingface.co/Awais05/leaftrack-yolo11n-seg) and
+[`Awais05/leaftrack-yolo11s-seg`](https://huggingface.co/Awais05/leaftrack-yolo11s-seg).
+
+```python
+from leaftrack.segment import LeafSegmenter
+
+segmenter = LeafSegmenter.from_hub("Awais05/leaftrack-yolo11n-seg", conf=0.30)
+leaves = segmenter.predict(rgb_image)  # list of LeafInstance: mask, box, confidence, area
+```
+
+`conf=0.30` is the threshold selected on the validation plants. Weights are published with `python -m leaftrack.hub` and never committed to git.
 
 ## Development
 
