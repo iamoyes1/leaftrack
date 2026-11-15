@@ -24,12 +24,11 @@ notebooks/        Thin GPU launcher notebooks
 tests/            pytest suite
 ```
 
-## Datasets
+## Dataset
 
-- [CVPPP Leaf Segmentation Challenge](https://www.plant-phenotyping.org/datasets-home)
-- [KOMATSUNA](http://limu.ait.kyushu-u.ac.jp/~agri/komatsuna/) time-lapse dataset
+[KOMATSUNA](http://limu.ait.kyushu-u.ac.jp/~agri/komatsuna/) (Uchiyama et al., 2017): 1,200 labelled top-down frames of 10 plants over 10 days, with leaf identities that stay consistent over time. That makes it a fit for both segmentation and tracking evaluation.
 
-See [data/README.md](data/README.md) for where to place them. Datasets and model weights are never committed.
+The data is converted to YOLO-seg polygons and split **by plant, not by frame**, so no plant seen in training appears in validation or test. See [data/README.md](data/README.md) for the verified data format, conversion quality and split. Datasets and model weights are never committed.
 
 ## Development
 

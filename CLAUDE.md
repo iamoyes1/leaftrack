@@ -22,6 +22,17 @@ demo on Hugging Face Spaces, README with demo GIF and results table.
 - Datasets (CVPPP leaf segmentation, KOMATSUNA time-lapse) live in `data/raw/`
   and are never committed.
 
+## Decisions
+
+- 2026-11-15: CVPPP is **not used**. Its terms forbid commercial use
+  (including screenshots in advertising) and redistribution, which conflicts
+  with a public portfolio, published weights and a live demo. Train and
+  evaluate on KOMATSUNA only unless the owners grant written permission.
+- Splits are by physical plant (`sequence_id`), never by frame or camera. The
+  committed split lives in `configs/splits/komatsuna.json`.
+- KOMATSUNA label colors are stable per leaf over time, so they serve as
+  ground-truth track IDs (kept per label line in `manifest.csv`).
+
 ## Standards
 
 Type hints, docstrings, small focused modules, pytest tests, clear commit
